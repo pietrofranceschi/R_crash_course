@@ -14,15 +14,15 @@ summary(mpg)
 
 ## my first plot .... engine displacement, miles per gallon
 ggplot(data = mpg) +
-  geom_point(mapping = aes(x = displ, y = hwy))
-
+  geom_point(mapping = aes(x = displ, y = hwy)) + 
+  geom_point(mapping = aes(x = displ, y = cty), col = "red")
 ## the same can be extended ... playing with rguments
 ggplot(data = mpg) +
-  geom_point(mapping = aes(x = displ, y = hwy), col = class)
+  geom_point(mapping = aes(x = displ, y = hwy), col = "red")
 
 ## but more interestingly ...
 ggplot(data = mpg) +
-  geom_point(mapping = aes(x = displ, y = hwy, col = class))
+  geom_point(mapping = aes(x = displ, y = hwy, col = class, size  = cyl))
 
 ## what aesthetics could I use?
 ## another time ....
@@ -31,8 +31,9 @@ ggplot(data = mpg) +
 
 
 ggplot(data = mpg) +
-  geom_point(mapping = aes(x = displ, y = hwy, col = class)) + 
-  facet_wrap(~class)
+  geom_point(mapping = aes(x = displ, y = hwy, col = class, size  = cyl/2)) + 
+  facet_wrap(~class, scales = "free") + 
+  theme_light() + theme(aspect.ratio = 1)
 
 
 ## Some more plots ####################################################################
@@ -43,13 +44,12 @@ ggplot(data = mpg) +
   facet_wrap(~class)
 
 ## or jitter!
-ggplot(data = mpg) +
-  geom_jitter(mapping = aes(x = class, y = displ, col = class), width = 0.1)
+myplot <- ggplot(data = mpg) +
+  geom_jitter(mapping = aes(x = class, y = displ, col = class), width = 0.1) +
+  theme_light()
 
 
 ## where could I put some additional characteristics?
-
-
 ggplot(data = mpg) +
   geom_jitter(mapping = aes(x = class, y = displ, col = manufacturer), width = 0.1) + 
   theme_minimal()
@@ -85,11 +85,19 @@ ggplot(data = camera) +
 ## PIPING and data carpentry ###################
 ## Objective: select only some columns and focus on CANON models
 
-camera_dataset %>% 
+camera %>% 
   select(Model,`Release date`,`Max resolution`) %>% 
   filter(grepl("Canon",Model)) %>% 
   ggplot() + 
   geom_point(mapping = aes(x = `Release date`, y = `Max resolution`)) + 
+  theme_minimal()
+
+
+camera %>% 
+  filter(grepl("Canon",Model)) %>% 
+  mutate(ratio = `Zoom tele (T)`/`Zoom wide (W)`) %>% 
+  ggplot() + 
+  geom_point(mapping = aes(x = `Release date`, y = ratio)) + 
   theme_minimal()
 
 ## let's jus look to the grepl function
@@ -105,7 +113,49 @@ camera_dataset%>%
   geom_point(mapping = aes(x = `Release date`, y = myratio)) + 
   theme_minimal()
 
-## something more clever????
+#
+
+pippo <- camera%>% 
+  separate(Model, c("Producer","Model1","Model2")," ") %>% 
+  mutate(M = paste(Model1,Model2)) %>%  ggplot() + 
+  geom_point(mapping = aes(x = `Release date`, y = `Max resolution`)) + 
+  facet_wrap(~Producer) + 
+  theme_minimal()
+  
+
+## faceting
+
+camera <- camera %>% 
+  separate(Model, c("Producer","Model1","Model2")," ") %>% 
+  mutate(M = paste(Model1,Model2))
+
+
+camera %>% 
+  ggplot() +
+  geom_jitter(aes(x = Producer, y = `Zoom wide (W)`), width = 0.1)
+
+
+## Gather
+camera %>% 
+  gather(Parameter, value, `Release date`:Price) %>% 
+  ggplot() +
+  geom_jitter(aes(x = Producer, y = value), width = 0.1) +
+  facet_wrap(~Parameter,scales = "free")
+
+
+camera %>% 
+  group_by(`Release date`, Producer) %>% 
+  summarise(avg_res = mean(`Max resolution`))
+
+
+
+
+  mutate(myratio = `Zoom wide (W)`/`Zoom tele (T)`) %>% 
+  ggplot() +
+  geom_jitter(aes(x = Producer, y = myratio), width = 0.05, size = 0.5)
+
+
+
 
 
 ## Summary statistics ....

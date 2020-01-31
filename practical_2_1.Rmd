@@ -1,0 +1,114 @@
+---
+title: "practical_1_2"
+author: "Pietro Franceschi"
+date: "03/10/2019"
+output: html_document
+---
+
+## Save the Output
+
+```{r}
+library(readr)
+library(tidyverse)
+data(mpg)
+```
+
+Binary file 
+
+```{r}
+## RData format
+save(mpg, file = "mpg.RData")
+```
+
+
+Comma separated file "excel frendly"
+
+```{r}
+## as an alternative you can save as csv
+write_csv(mpg, path = "mpg.csv")
+```
+
+## Plotting with pipes ...
+
+first get the wines data
+```{r}
+## Load the wines data
+wines <- read_csv("wines.csv") 
+```
+
+and now make a ggplot of the corresponding data.frame
+```{r}
+wines %>% 
+  ggplot() +
+  geom_point(mapping = aes(x = alcohol, y = malic_acid, col = class)) +
+  scale_color_brewer(palette = "Set1") + 
+  theme_light()
+```
+
+
+Suppose now that we want to plot the data only of Barbera ...
+
+```{r}
+wines %>% 
+  filter(class == "Barolo") %>% 
+  ggplot() +
+  geom_point(mapping = aes(x = alcohol, y = malic_acid, col = class)) +
+  scale_color_brewer(palette = "Set1") + 
+  theme_light()
+```
+
+
+
+## Select, filter, mutate ...
+
+```{r}
+wines %>% 
+  select(class,malic_acid)
+  
+```
+
+```{r}
+wines %>% 
+  select(class,malic_acid,proline) %>% 
+  mutate(myratio = malic_acid/proline) %>% 
+  ggplot() + 
+  geom_jitter(mapping = aes(x = class, y = myratio, col = class)) +
+  scale_y_log10() +
+  theme_light()
+```
+
+
+## Gather
+The function gather allows to transform a wide data frame to a long data frame
+
+```{r}
+wines %>% 
+  gather(parameter, value, alcohol:proline)
+```
+
+And this is very useful for plotting ...
+
+```{r}
+wines %>% 
+  gather(parameter, value, alcohol:proline) %>% 
+  ggplot() + 
+  geom_jitter(mapping = aes(x = class, y = value, col = class), width = 0.2, size = 0.2, alpha = 0.7) + 
+  facet_wrap(~parameter, scales = "free", ncol = 3) + 
+  theme_light()
+```
+
+
+## Group_by
+
+```{r}
+wines %>% 
+  select(proline, class) %>% 
+  group_by(class) %>% 
+  summarise(rsd = (sd(proline)/mean(proline))*100) %>% 
+  write_csv(path = "ciao.csv")
+```
+
+
+
+
+

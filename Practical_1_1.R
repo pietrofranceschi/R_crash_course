@@ -34,7 +34,6 @@ myvector[3]
 
 ## or only change the second element of my object
 myvector[2] <- 30
-my
 
 ## this gives me the third element of the  vector, remember that the first element in the 
 ## remember that R is counting from one and not zero
@@ -84,7 +83,8 @@ mymonths <- c("Jan","Feb","Mar",
 days <- c(31,28,31,30,31,30,31,31,30,31,30,31)
 season <- c(rep(c("winter","spring","summer","autumn"), each = 3))
 
-yeardf <- data.frame("month" = mymonths, "length" = days, "season" = season)
+yeardf <- data.frame("month" = mymonths, "length" = days, "season" = season,
+                     stringsAsFactors = FALSE)
 
 factor(yeardf$season)
 
@@ -120,7 +120,7 @@ ggplot(data = mpg) +
 
 ## but more interestingly ...
 ggplot(data = mpg) +
-  geom_point(mapping = aes(x = displ, y = hwy, col = class)) +
+  geom_point(mapping = aes(x = displ, y = hwy, col = class)) 
 #  theme_light() +
   xlim(c(5,7))            ## set x limits
 
