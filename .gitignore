@@ -4,3 +4,5 @@
 .Rproj.user/*
 .gitignore
 images/*
+Lecture*
+.Rproj.user

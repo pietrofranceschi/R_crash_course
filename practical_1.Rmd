@@ -11,8 +11,7 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-The objective here is to start familaiarizing with R, and Rstudio As you see the characetr '#' is udes to idetify lines of comments
-they are not interpreted and are useful for us to kee track of the process  of analysis
+The objective here is to start familaiarizing with R, and Rstudio As you see the characetr '#' is udes to idetify lines of comments they are not interpreted and are useful for us to kee track of the process of analysis
 
 As discussed assignment (sending somethingin the workspace) is done using '<-' the shrotcut to insert it is 'ALT' + '-' 
 a complete list of shortcut can be found in the menu under 'tools'
@@ -62,7 +61,7 @@ myarray
 ```
 
 
-now I would like you to comment the previous command .....
+Now I would like you to comment the previous command .....
 
 Key ideas:
 - what is a function
@@ -132,7 +131,7 @@ library(tidyverse)
 ## and also some data
 data(mpg)
 
-
+## as we discussed this shows the first lines of the data.frame
 head(mpg)
 ```
 
@@ -151,24 +150,26 @@ And now we look at plots!
 ```{r}
 ## my first plot .... engine displacement, miles per gallon
 ggplot(data = mpg) +
-  geom_point(mapping = aes(x = class, y = hwy, col = year), size = 3, alpha = 0.5) +
-  theme_light()
-
-```
-
-
-```{r}
-## the same can be extended ... playing with arguments
-ggplot(data = mpg) +
   geom_point(mapping = aes(x = displ, y = hwy), col = "red")
   
 ```
 
+
+
+This goes a little bit farer away
+
 ```{r}
-## but more interestingly ...
 ggplot(data = mpg) +
-  geom_point(mapping = aes(x = displ, y = hwy, col = class)) 
+  ## on the canvas plot points linking their eastetics to the column names!
+  geom_point(mapping = aes(x = displ, y = hwy, col = class),  
+             size = 3, 
+             alpha = 0.5) +
+  ## add additional general aestetics
+  theme_light() +
+  theme(aspect.ratio = 0.5)
+
 ```
+
 
 
 what aesthetics could I use? another time ....
@@ -176,22 +177,10 @@ what aesthetics could I use? another time ....
 ?geom_point
 
 
-
-```{r}
-ggplot(data = mpg) +
-  geom_point(mapping = aes(x = displ, y = hwy, col = class)) + 
-  facet_wrap(~class, scales ="free")
-
-```
-
-
-## More Plots
-
 ```{r}
 ## histograms, scales free
 ggplot(data = mpg) +
-  geom_histogram(mapping = aes(x = displ)) + 
-  facet_wrap(~class)
+  geom_histogram(mapping = aes(x = displ, fill = class), alpha = 0.5) 
 ```
 
 
@@ -202,32 +191,77 @@ ggplot(data = mpg) +
 
 ```
 
-when you specify the names of the columns pay attention to the apex!
 
- "ciao"
- 'ciao'
- `ciao`
- 
- are not equivalent
- 
- 
- ## Get the data in 
- 
+This is some "material" for your assignment ;-)
+
 ```{r}
-library(readr)
-wines <- read_csv("wines.csv")
+## geom_jitter
+## geom_histogram
+## geom_line
+## geom_point
+## geom_density
 ```
- 
- 
- And now ...
- 
+
+
+## Assignment #1
+
+1. Play around with mpg changing the type of plots 
+2. Associate aesthetics to categorical or continuous properties
+3. Make a boxplot of "displ" as a function of the class of the vehicle
+4. Just play and ask!
+
+
+## Splitting the plot in subplots
+
 ```{r}
-summary(wines)
+## group specific subplots
+ggplot(data = mpg) + 
+  geom_point(mapping = aes(x = displ, y = hwy, col = class), alpha = 0.5) +
+  facet_wrap(~class) + 
+  theme_light() +
+  theme(aspect.ratio = 0.5)
 ```
- 
- 
- 
- 
+
+
+
+## From wide to long data.frames
+
+```{r}
+mpglong <- gather(mpg, 
+                  key = "Property",
+                  value = "Value",
+                  displ,cty,hwy)
+
+mpglong
+```
+
+
+## Make a full plot of al the properties ...
+
+We use the long data frame 
+
+```{r}
+ggplot(mpglong) + 
+  geom_jitter(aes(x = class, y = Value, col = class), width = 0.1) + 
+  geom_boxplot(aes(x = class, y = Value, fill = class), alpha = 0.5) + 
+  facet_wrap(~Property, scales = "free") + 
+  coord_flip() +         ### switch the axis to show the names ...
+  theme_light() + 
+  theme(aspect.ratio = 1)
+```
+
+
+## Iris data
+
+```{r}
+## here is the starting of the story ....
+data(iris)
+
+```
+
+
+
+
 
 
 
