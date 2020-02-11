@@ -1,0 +1,112 @@
+---
+title: "practical_2"
+author: "Pietro Franceschi"
+date: "03/10/2019"
+output: html_document
+---
+
+## Save the Output
+
+```{r}
+## this library contains utilities to write and read text files in R
+library(readr)
+library(tidyverse)
+data(mpg)
+```
+
+A series of R objects can be saved as binary (compressed) file `.RData`
+
+```{r}
+## RData format
+save(mpg, file = "mpg.RData")
+```
+
+
+The previous type of file can be read only by R. It can be handy to have a more "human" type of output.
+For example, a table can be saved sa comma separated file "excel frendly"
+
+```{r}
+## as an alternative you can save as csv
+write_csv(mpg, path = "mpg.csv")
+```
+
+## Plotting with pipes ...
+
+Let's get some data in ...
+```{r}
+## Load the wines data
+wines <- read_csv("data/wines.csv") 
+```
+
+## Assignment #5
+1. Get the wines data from GitHub (wines.csv)
+2. Import the data into R
+3. make a text summary of your data (`summary()`)
+4. Plot the relation between proanthocyanidins and total phenols for the three types of wines.
+5. Can you do a boxplot of the different properties of the wines (also here remember wide and narrow data.frames)?
+
+... more or less everything you need to complete the assignment is scattered somewhere between this practical and the first one!
+
+
+## Data Carpentry: Select, filter, mutate ...
+
+The first and fast thing to do is to plot the data "piping" the data into ggplot
+
+```{r}
+wines %>% 
+  ggplot() +
+  geom_point(mapping = aes(x = alcohol, y = malic_acid, col = class)) +
+  scale_color_brewer(palette = "Set1") + 
+  theme_light()
+```
+
+
+Suppose now that we want to plot the data only of Barbera ... here the pipe is used to manipulate "on the fly" the wines dataset 
+
+```{r}
+wines %>% 
+  select(alcohol,malic_acid,class) %>% 
+  filter(class == "Barolo") %>% 
+  ggplot() +
+  geom_point(mapping = aes(x = alcohol, y = malic_acid, col = class)) +
+  scale_color_brewer(palette = "Set1") + ## this is a nice color scheme ;-)
+  theme_light()
+```
+
+An additional "joint" of the pipe can be used to calculate derived quantities
+
+```{r}
+wines %>% 
+  select(class,malic_acid,proline) %>% 
+  mutate(myratio = malic_acid/proline) %>% 
+  ggplot() + 
+  geom_jitter(mapping = aes(x = class, y = myratio, col = class), width = 0.1) +
+  scale_y_log10() +
+  theme_light()
+```
+
+And, finally, also gather can be included in the pipe. can you comment the different lines of code? 
+
+
+```{r}
+wines %>% 
+  gather(parameter, value, alcohol:proline) %>% 
+  ggplot() + 
+  geom_jitter(mapping = aes(x = class, y = value, col = class), width = 0.2, size = 0.2, alpha = 0.7) + 
+  facet_wrap(~parameter, scales = "free", ncol = 3) + 
+  theme_light()
+```
+
+
+## Assignment #6
+1. Load the iris data 
+2. Calculate the ratios sepal.width/sepal.length and petal.width/petal.length (with **mutate()**!)
+3. Plot the two ratios for all the iris variety
+4. Save the modified table as .csv
+5. Open it with Excel and see if you managed to save the new columns
+
+**Important** Everything should be done with pipes! So only one command!
+
+
+
+

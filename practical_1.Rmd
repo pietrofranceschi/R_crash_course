@@ -1,4 +1,4 @@
----
+  ---
 title: "Practicals 1"
 author: "Pietro Franceschi"
 date: "29/09/2019"
@@ -39,7 +39,7 @@ myvector <- c(1,2,3,4)
 ```
 
 
-As we discussed, multidimensional objects can be accessed either by position of by name. This second way is possible only if the objects inside the multidimensionale "container" have names ...
+As we discussed, **multidimensional** objects can be accessed either by position of by name. This second way is possible only if the objects inside the multidimensionale "container" have names ...
 ```{r}
 ## assignment by name
 u <- c("carlo" = 2, "due" = 10)
@@ -213,6 +213,8 @@ This is some "material" for your assignment ;-)
 
 ## Splitting the plot in subplots
 
+As we discussed, faceting is used to split a plot in different subpanels on the bases of a categorical variable, which is normally present in the data.frame/tibble
+
 ```{r}
 ## group specific subplots
 ggplot(data = mpg) + 
@@ -222,25 +224,32 @@ ggplot(data = mpg) +
   theme(aspect.ratio = 0.5)
 ```
 
-
+With the previous command all the plots have the same scale, this behavior can be controlled by setting the `scales` argument inside the facet_wrap() call.
 
 ## From wide to long data.frames
 
+As we discussed in the lecture, a clever combination of reshaping and faceting can be used to plot in a unique plot a series of different properties (column).
+
+To do that, a data frame in wide form should be transformed in its "long" counterpart.
+
 ```{r}
+## the function "gather" goes from wide to long format. To do that it is necessary to provide the name 
+## of two new columns: the one which will store the variable names and the one which will collect the values
+## here we call them "Property" and "value"
 mpglong <- gather(mpg, 
-                  key = "Property",
+                  key = "Property", 
                   value = "Value",
-                  displ,cty,hwy)
+                  displ,cty,hwy)  ## these are the names of the column we are "collecting"
 
 mpglong
 ```
 
 
-## Make a full plot of al the properties ...
+## Make a full plot of all the properties ...
 
-We use the long data frame 
+We use now the long data frame 
 
-```{r}
+```{r fig.width=12}
 ggplot(mpglong) + 
   geom_jitter(aes(x = class, y = Value, col = class), width = 0.1) + 
   geom_boxplot(aes(x = class, y = Value, fill = class), alpha = 0.5) + 
@@ -252,13 +261,18 @@ ggplot(mpglong) +
 
 
 ## Iris data
+The last part of this pratical is dedicated to the Iris dataset, which is also available in R
 
 ```{r}
 ## here is the starting of the story ....
 data(iris)
 
+head(iris)
 ```
 
+## Assignment #4
+1. Look for correlation between  Sepal.Length and Sepal.Width (Petal.Length and Petal.Width) for the three iris varieties
+2. Make a faceted boxplot showing the four iris properties as a function of the species  
 
 
 
