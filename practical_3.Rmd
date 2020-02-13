@@ -1,0 +1,138 @@
+---
+title: "practical_3"
+author: "Pietro Franceschi"
+date: "03/10/2019"
+output: html_document
+---
+
+## Loads
+
+```{r}
+## libraries
+library(tidyverse)
+library(readr)
+```
+
+
+```{r}
+## Olympic games data
+athl <- read_csv("data/athlete_events.csv")
+```
+
+How many specialities so we have?
+
+```{r}
+## number of specialities
+length(unique(athl$Event))
+
+## number of athlets
+nrow(athl)
+```
+
+In athletics, can we see a change in the age of the athlets over time?
+
+```{r}
+## let's get the list of the sports
+unique(athl$Sport)
+```
+
+
+```{r}
+athl %>% 
+  filter(Sport == "Athletics") %>% 
+  ggplot() + 
+  geom_jitter(aes(x = Year, y = Age, col = Sex), width = 0.2, size = 0.1) +
+  scale_color_brewer(palette = "Set1", name = "Gender") + 
+  facet_wrap(~Sex, ncol = 1) + 
+  theme_light()
+  
+```
+
+Which, by the way, gives already some interesting result ... apparently the age of participation is rising mainly in females
+
+
+```{r}
+athl %>% 
+  filter(Sport == "Athletics") %>% 
+  filter(Medal %in% c("Gold","Silver","Bronze")) %>% 
+  ggplot() + 
+  geom_jitter(aes(x = Year, y = Age, col = Sex), width = 0.2, size = 0.1) +
+  geom_smooth(aes(x = Year, y = Age), method = lm) + 
+  scale_color_brewer(palette = "Set1", name = "Gender") + 
+  facet_wrap(~Sex, ncol = 1) + 
+  theme_light()
+```
+
+## Grouping and Summarising
+
+As an easy starting point we start from the iris dataset
+
+```{r}
+## get the data
+data(iris)
+```
+
+Now we group it ...
+
+```{r}
+iris %>% 
+  group_by(Species)
+```
+
+Apparently nothing has changed ...
+
+```{r}
+## This performs "on the fly" the mean per group! 
+
+iris %>% 
+  group_by(Species) %>% 
+  summarise(sep = mean(Sepal.Length))
+
+## remember if we not assign the pipe to something the output will be only printed!
+```
+
+
+```{r}
+## This performs "on the fly" the mean and sample counts per group! 
+iris %>% 
+  group_by(Species) %>% 
+  summarise(sep = mean(Sepal.Length), 
+            nsamp = length(Sepal.Length))
+```
+
+Multiple columns can be summarised by using `summarise_at`
+
+```{r}
+iris %>% 
+  group_by(Species) %>% 
+  summarise_at(vars(`Sepal.Length`:`Petal.Width`),
+               .funs = list(sep = mean, 
+                            nsamp = length))
+```
+
+This type of writing ca be challenging ... the alternative is to rely on gather ;-)
+
+
+```{r}
+iris %>% 
+  gather(parameter,value, -Species) %>% 
+  group_by(parameter,Species) %>% 
+  summarise(sep = mean(value), 
+            nsamp = length(value)) %>% 
+  
+```
+
+
+```{r}
+athl %>% 
+  filter(Season == "Summer") %>% 
+  filter(Medal %in% c("Gold")) %>% 
+  group_by(Year,Name,Sport) %>% 
+  summarise(medals = length(Medal)) %>% 
+  ungroup() %>% 
+  filter(medals > 3) %>% 
+  arrange(desc(medals))
+```
+
+
+

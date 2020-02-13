@@ -54,6 +54,7 @@ The first and fast thing to do is to plot the data "piping" the data into ggplot
 
 ```{r}
 wines %>% 
+  mutate(class = factor(class, levels = c("Grignolino","Barbera","Barolo"))) %>% 
   ggplot() +
   geom_point(mapping = aes(x = alcohol, y = malic_acid, col = class)) +
   scale_color_brewer(palette = "Set1") + 
@@ -79,6 +80,7 @@ An additional "joint" of the pipe can be used to calculate derived quantities
 wines %>% 
   select(class,malic_acid,proline) %>% 
   mutate(myratio = malic_acid/proline) %>% 
+  mutate(class = factor(class, levels = c("Grignolino","Barbera","Barolo"))) %>% 
   ggplot() + 
   geom_jitter(mapping = aes(x = class, y = myratio, col = class), width = 0.1) +
   scale_y_log10() +
@@ -88,11 +90,13 @@ wines %>%
 And, finally, also gather can be included in the pipe. can you comment the different lines of code? 
 
 
-```{r}
+```{r fig.width=10}
 wines %>% 
   gather(parameter, value, alcohol:proline) %>% 
+  mutate(parameter = factor(parameter, levels = unique(parameter))) %>% 
   ggplot() + 
-  geom_jitter(mapping = aes(x = class, y = value, col = class), width = 0.2, size = 0.2, alpha = 0.7) + 
+  geom_jitter(mapping = aes(x = class, y = value, col = class), 
+              width = 0.2, size = 1, alpha = 0.7) + 
   facet_wrap(~parameter, scales = "free", ncol = 3) + 
   theme_light()
 ```
