@@ -826,7 +826,7 @@ To summarize more than one columns grouping should be combined with `gather` ;-)
 
 * Get the "Olympic Game Dataset"
 * List the athlets who won more than 4 gold medals in at least one summer olympic games
-* Save the list with their info in a file and lod it in Excel
+* Save the list with their info in a file and load it in Excel
 
 ## Average Age in Athletics
 \tiny
