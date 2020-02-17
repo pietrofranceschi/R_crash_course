@@ -1,0 +1,49 @@
+---
+title: "Practical_4"
+author: "Pietro Franceschi"
+date: "16/02/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+## Basic functions
+```{r}
+## this "dummy" function calculates the square of a number
+
+mysquare <- function(n){
+  out <- n^2
+  return(out)
+}
+
+
+mysquare(10)
+```
+
+
+## If statements
+
+```{r}
+## This function tells me if a number is even or odd..
+
+iseven <- function(n){
+  resto <- n %% 2
+  if (resto == 0) {
+    return("pari")
+  } else {
+    return("dispari")
+  }
+}
+
+iseven(4)
+```
+
+
+
+
+
+
+

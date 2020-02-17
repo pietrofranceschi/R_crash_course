@@ -1,0 +1,20 @@
+---
+title: "AD NAPE Analysis"
+author: "Pietro Franceschi"
+date: "11/02/2020"
+institute: "FEM - UBC"
+
+output: 
+  beamer_presentation:
+    theme: "Warsaw"
+    colortheme: "orchid"
+    incremental: false
+
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+
+

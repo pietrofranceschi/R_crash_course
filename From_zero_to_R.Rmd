@@ -1,5 +1,5 @@
 ---
-title: "Lecture 1 - From Zero"
+title: "From Zero to R"
 author: "Pietro Franceschi"
 date: "11/02/2020"
 institute: "FEM - UBC"
@@ -14,6 +14,7 @@ output:
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
+library(knitr)
 ```
 
 ## Summary
@@ -24,6 +25,7 @@ knitr::opts_chunk$set(echo = FALSE)
 * R basic characteristics
 * Visualizing data with ggplot
 * Data carpentry
+* Writing Functions
 
 # Introduction
 
@@ -61,13 +63,23 @@ knitr::opts_chunk$set(echo = FALSE)
 * GitHub - <https://github.com/>
 
 ## Packages on CRAN
-![](images/packages.png)
+
+```{r, echo=FALSE, fig.align='center', out.width="90%"}
+include_graphics("images/packages.png")
+```
+
 
 ## RStudio
-![](images/rstudio.png)
+```{r, echo=FALSE, fig.align='center', out.width="70%"}
+include_graphics("images/rstudio.png")
+```
+
 
 ## RStudio
-![](images/live.jpg)
+```{r, echo=FALSE, fig.align='center', out.width="90%"}
+include_graphics("images/live.jpg")
+```
+
 
 ## How do we work
 
@@ -161,7 +173,10 @@ c <- a+b
 
 Multidimensional objects are constructed by collecting together multiple basic data types
 
-![](images/multidim.png)
+```{r, echo=FALSE, fig.align='center', out.width="70%"}
+include_graphics("images/multidim.png")
+```
+
 
 The elements (or the rows and columns) can be also **named**
 
@@ -672,7 +687,7 @@ scale_x_continuous("Label",                             ## Label of the axis
 
 * The overall appearence of the graph can be  higly customized, however some precooked solutions are already available within `ggplot`
 * [ggplot theme list](https://ggplot2.tidyverse.org/reference/ggtheme.html)
-* A lower level control can be achieved by using the `theme(...)` [function]{https://ggplot2.tidyverse.org/reference/theme.html} 
+* A lower level control can be achieved by using the `theme(...)` function 
 * More themes are available within the `ggtheme` pachage
 
 \vspace{1em}
@@ -766,6 +781,13 @@ The file athlete_events.csv contains 271116 rows and 15 columns. Each row corres
 * Event - Event
 * Medal - Gold, Silver, Bronze, or NA
 
+```{r message=FALSE, warning=FALSE, include=FALSE}
+## Olympic games data
+athl <- read_csv("data/athlete_events.csv")
+```
+
+
+
 ***
 ![](images/live.jpg)
 
@@ -804,10 +826,129 @@ To summarize more than one columns grouping should be combined with `gather` ;-)
 
 * Get the "Olympic Game Dataset"
 * List the athlets who won more than 4 gold medals in at least one summer olympic games
-* Save the list with their info in a file and lod it in excel
-* Focus on athletics
-* Plot the average and max age of a gold medal winner over the years
+* Save the list with their info in a file and lod it in Excel
 
+## Average Age in Athletics
+\tiny
+```{r, echo=TRUE, out.width="50%", fig.align = "center"}
+athl %>% 
+  filter(Sport == "Athletics") %>% 
+  filter(Sex == "M") %>% 
+  group_by(Year) %>% 
+  summarise(avg_age = mean(Age, na.rm = TRUE)) %>% 
+  ungroup() %>% 
+  ggplot() + 
+  geom_line(aes(x = Year, y = avg_age), col = "steelblue") + 
+  geom_point(aes(x = Year, y = avg_age), col = "orange", alpha = 0.5, size = 3) + 
+  ylab("Average Athlete Age") + 
+  theme_light()
+```
+
+## Assignment #9
+
+* Get the "Olympic Game Dataset"
+* Make a plot showing the trend of the average BMI of the participants/medal winners for a set of running disciplines of increasing length (100m, 200m, 400m, 800m, 1500m, 5000m, 10000m, marathon)
+
+Note: some helpful code hits are included in practical_3
+
+
+
+# Functions
+
+## Functions
+
+* Functions are the workhorse of all programming languages
+* Almost everything we have been doing so far is actually performed by functions
+* The packages are basically extending the language capabilities by adding new functions
+
+
+## Why should one write a function?
+
+* If I do several time the same operation a function saves me time
+* If I do several time the same operation a function prevents me of making copy/paste errors
+
+## Anatomy of a function
+
+```{r eval=FALSE, echo=TRUE}
+## this is the anatomy of a function called pippo
+
+pippo <- function(inputs){
+  ## here I do something on the inputs
+  output <- something(input)
+  return(output)
+}
+
+
+## after the previous definition I can use pippo as
+
+a <- pippo(b)
+
+```
+
+## Notes
+### Remember!
+
+* it is wise to use meaningful names ;-) (not pippo)
+* the function can have multiple inputs
+* the function can output only one R object (if you want complex output you should wrap them into a list)
+* the variable created inside the function are not living in the workspace. Their **scope** is limited. 
+
+***
+![](images/live.jpg)
+
+
+## Assignment #10
+
+* Create a function which calcuate the average value of anumeric vector
+* Create a function which scales a vector to the interval [0,1]. So the minimum of the vector should be shifted to zero and the maximum scaled to one.
+
+## *if* statements
+
+```{r eval=FALSE, echo=TRUE}
+## If statements are often used condition the output of the functions
+## The if command in R looks like 
+
+if (condition) {
+  # do this
+} else {
+  #do that
+}
+```
+
+***
+![](images/live.jpg)
+
+## Assignment #11
+
+* Create a function which calculates the absolute value of a number
+* Create a function which check if the length of a vector is even or odd
+
+## Function arguments
+
+As we have anticipated, functions can have multiple inputs (**arguments**) which can be used to tune the behavior of the function, adapting it to different use cases. 
+Arguments have, in general, default values which are defined during the function definition
+
+\scriptsize
+```{r eval=FALSE, echo=TRUE}
+
+pippo <- function(a, b = 10, c = "ciao"){
+  ## b and c are have default values, If they are not explicitly 
+  ## changed the function will work with them
+  ## here I do something on the inputs
+  output <- something(a,b,c)
+  return(output)
+}
+
+pippo(10) ## a is set to 10, b and c keep their default values
+pippo(10, b = 9) ## a is 10, b is now  9, while c keeps "ciao"
+
+```
+
+## Assignment #12
+
+* Create a function which calculates either the mean or the standard deviation of a vector. The choice should be performed by setting a specific argument in the function call
+* Create a function which calculate the mean of a numeric vector excluding missing values.
+* Use your function to calculate the mean inside a `summarise()` call in your analysis pipeline for the Assignment #9
 
 
 

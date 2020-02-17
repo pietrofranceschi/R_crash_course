@@ -1,5 +1,5 @@
 ---
-title: "practical_3"
+title: "Practical_3"
 author: "Pietro Franceschi"
 date: "03/10/2019"
 output: html_document
@@ -28,6 +28,11 @@ length(unique(athl$Event))
 ## number of athlets
 nrow(athl)
 ```
+
+```{r}
+length(unique(athl$Name))
+```
+
 
 In athletics, can we see a change in the age of the athlets over time?
 
@@ -117,8 +122,8 @@ This type of writing ca be challenging ... the alternative is to rely on gather 
 iris %>% 
   gather(parameter,value, -Species) %>% 
   group_by(parameter,Species) %>% 
-  summarise(sep = mean(value), 
-            nsamp = length(value)) %>% 
+  summarise(mean = mean(value), 
+            sd = sd(value))
   
 ```
 
@@ -133,6 +138,69 @@ athl %>%
   filter(medals > 3) %>% 
   arrange(desc(medals))
 ```
+
+Plotting the average age for the athlets over the years ...
+
+```{r}
+athl %>% 
+  filter(Sport == "Athletics") %>% 
+  filter(Sex == "M") %>% 
+  group_by(Year) %>% 
+  summarise(avg_age = mean(Age, na.rm = TRUE)) %>% 
+  ungroup() %>% 
+  ggplot() + 
+  geom_line(aes(x = Year, y = avg_age), col = "steelblue") + 
+  geom_point(aes(x = Year, y = avg_age), col = "orange", alpha = 0.5, size = 3) + 
+  ylab("Average Athlete Age") + 
+  theme_light()
+```
+
+
+## Code Hints for Assignment #9
+
+```{r}
+## If you calculate the mean of a vectro containing NAs, you will get NA by default
+## to exclude the NAs you have to add an argument to the mean() function
+mean(c(1,4,5,6,NA), na.rm = TRUE)
+```
+
+
+```{r}
+## The list of events is quite long ... to get the "right" name for an event you need
+eventlist <- unique(athl$Event)
+
+length(eventlist)
+```
+
+```{r}
+## the function grep("string",vector) tells you the index of the positions where "string" 
+## is present in the vector
+
+id100 <- grep("100",eventlist)
+id100
+
+
+## prints the event names which contains "100"
+eventlist[id100]
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+```
+
+
+
 
 
 
