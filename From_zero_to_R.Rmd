@@ -805,7 +805,7 @@ athl <- read_csv("data/athlete_events.csv")
 
 \footnotesize
 * `group_by()`: this function can be used inside a pipe to group the samples on the bases of a set of discrete variables. Grouping can be removed from a tibble by using the `ungroup()` function
-* `summarise()`: this function can be used apply some sort summary function (e.g. mean, median, sd, ...) on the grouped data frame. summarise can be used also to calculate multiple statistics
+* `summarise()`: this function can be used to apply some sort summary function (e.g. mean, median, sd, ...) on the grouped data frame. `summarise` can be used also to calculate multiple statistics
 
 \vspace{1em}
 \scriptsize
