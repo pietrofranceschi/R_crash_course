@@ -701,10 +701,10 @@ library(ggthemes)
 
 
 ## Plotting colors
-A good choice of colors is fundamental to highlight the scientifica message of every plot. 
+A good choice of colors is fundamental to highlight the scientific message of every plot. 
 
 * We are not good in distinguishing too many differnt colors
-* The level "visual" similarity of the colors will be implicitly perceived as sample similarity
+* The level of "visual" similarity of the colors will be implicitly perceived as sample similarity
 * Do we need a B&W representation?
 * Do we want to be "color blind" safe?
 
