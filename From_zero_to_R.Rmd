@@ -847,7 +847,7 @@ athl %>%
 ## Assignment #9
 
 * Get the "Olympic Game Dataset"
-* Make a plot showing the trend of the average BMI of the participants/medal winners for a set of running disciplines of increasing length (100m, 200m, 400m, 800m, 1500m, 5000m, 10000m, marathon)
+* Make a plot showing the trend of the average BMI (Weight / Height (m)) of the participants/medal winners for a set of running disciplines of increasing length (100m, 200m, 400m, 800m, 1500m, 5000m, 10000m, marathon)
 
 Note: some helpful code hits are included in practical_3
 
