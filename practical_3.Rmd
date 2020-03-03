@@ -128,6 +128,16 @@ iris %>%
 ```
 
 
+Or, even more intuitive, within "summarise" keep adding columns...
+```{r}
+iris %>% 
+  group_by(Species) %>% 
+  summarise(mean.sl=mean(Sepal.Length), mean.sw=mean(Sepal.Width))
+```
+
+
+
+
 ```{r}
 athl %>% 
   filter(Season == "Summer") %>% 
