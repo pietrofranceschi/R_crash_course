@@ -506,7 +506,7 @@ ggplot(mpglong) +
 ![](images/live.jpg)
 
 ## Edgar Anderson's Iris Data
-This famous (Fisher's or Anderson's) iris dataset gives the measurements in cm of the lenght and width of speals and petals for 50 flowers from each of 3 species of iris. 
+This famous (Fisher's or Anderson's) iris dataset gives the measurements in cm of the lenght and width of sepals and petals for 50 flowers from each of 3 species of iris. 
 
 The species are Iris **setosa, versicolor, and virginica**.
 \vspace{1em}
