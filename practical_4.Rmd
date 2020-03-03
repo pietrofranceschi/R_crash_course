@@ -31,6 +31,7 @@ mysquare(10)
 
 iseven <- function(n){
   resto <- n %% 2
+  print(resto)
   if (resto == 0) {
     return("pari")
   } else {
@@ -38,7 +39,7 @@ iseven <- function(n){
   }
 }
 
-iseven(4)
+iseven(5)
 ```
 
 

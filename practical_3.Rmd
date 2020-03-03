@@ -89,7 +89,7 @@ Apparently nothing has changed ...
 ```{r}
 ## This performs "on the fly" the mean per group! 
 
-iris %>% 
+mytable <- iris %>% 
   group_by(Species) %>% 
   summarise(sep = mean(Sepal.Length))
 
@@ -176,7 +176,7 @@ length(eventlist)
 ## the function grep("string",vector) tells you the index of the positions where "string" 
 ## is present in the vector
 
-id100 <- grep("100",eventlist)
+id100 <- grep("400",eventlist)
 id100
 
 
@@ -188,17 +188,9 @@ eventlist[id100]
 
 
 
-
-
-
-
-
-
-
-
-
+```{r}
+focusevent <- c("Athletics Men's 400 metres", "Athletics Men's 200 metres")
 ```
-
 
 
 
