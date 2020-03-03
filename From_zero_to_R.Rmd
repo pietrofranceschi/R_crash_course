@@ -567,7 +567,7 @@ List of Chemical properties of a group of three types of wines (Barolo, Barbera 
 
 ## Data Carpentry
 
-> With the term "data carpentry" we identify all the set of operations/manipulations we currently do during the process of data exploration
+> With the term "data carpentry" we identify the set of operations/manipulations we frequently do during the process of data exploration
 
 \vspace{1em}
 
@@ -580,7 +580,7 @@ List of Chemical properties of a group of three types of wines (Barolo, Barbera 
 
 ## The old way ...
 
-In the “standard” data analysis workflow, when several steps of transformation are needed the output of each transformation are saved and become the input of the subsequent step.
+In the “standard” data analysis workflow, when several steps of transformation are needed, the output of each transformation is saved and become the input of the subsequent step.
 This is time and memory inefficient ...
 \vspace{1em}
 \scriptsize
