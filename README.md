@@ -1,2 +1,2 @@
 # R_crash_course
-A very (very) fast introduction to R
+A very (very) fast introduction to R and data carpentry
