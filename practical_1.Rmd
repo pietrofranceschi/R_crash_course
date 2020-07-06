@@ -233,13 +233,13 @@ As we discussed in the lecture, a clever combination of reshaping and faceting c
 To do that, a data frame in wide form should be transformed in its "long" counterpart.
 
 ```{r}
-## the function "gather" goes from wide to long format. To do that it is necessary to provide the name 
+## the function "pivot longer" goes from wide to long format. To do that it is necessary to provide the name 
 ## of two new columns: the one which will store the variable names and the one which will collect the values
 ## here we call them "Property" and "value"
-mpglong <- gather(mpg, 
-                  key = "Property", 
-                  value = "Value",
-                  displ,cty,hwy)  ## these are the names of the column we are "collecting"
+mpglong <- pivot_longer(mpg, 
+                        cols = c("displ","cty","hwy"),  ## these are the names of the column we are "collecting"
+                   names_to = "Property", 
+                   values_to = "Value")  
 
 mpglong
 ```
@@ -261,7 +261,7 @@ ggplot(mpglong) +
 
 
 ## Iris data
-The last part of this pratical is dedicated to the Iris dataset, which is also available in R
+The last part of this practical is dedicated to the Iris dataset, which is also available in R
 
 ```{r}
 ## here is the starting of the story ....

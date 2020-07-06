@@ -23,7 +23,7 @@ save(mpg, file = "mpg.RData")
 
 
 The previous type of file can be read only by R. It can be handy to have a more "human" type of output.
-For example, a table can be saved sa comma separated file "excel frendly"
+For example, a table can be saved as comma separated file "excel friendly"
 
 ```{r}
 ## as an alternative you can save as csv
@@ -92,7 +92,7 @@ And, finally, also gather can be included in the pipe. can you comment the diffe
 
 ```{r fig.width=10}
 wines %>% 
-  gather(parameter, value, alcohol:proline) %>% 
+  pivot_longer(alcohol:proline, names_to = "parameter", values_to = "value") %>% 
   mutate(parameter = factor(parameter, levels = unique(parameter))) %>% 
   ggplot() + 
   geom_jitter(mapping = aes(x = class, y = value, col = class), 

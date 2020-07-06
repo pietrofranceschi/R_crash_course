@@ -115,12 +115,12 @@ iris %>%
                             nsamp = length))
 ```
 
-This type of writing ca be challenging ... the alternative is to rely on gather ;-)
+This type of writing ca be challenging ... the alternative is to rely on pivot_longer ;-)
 
 
 ```{r}
 iris %>% 
-  gather(parameter,value, -Species) %>% 
+  pivot_longer(-Species, names_to = "parameter", values_to = "value") %>% 
   group_by(parameter,Species) %>% 
   summarise(mean = mean(value), 
             sd = sd(value))
