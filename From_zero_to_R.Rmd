@@ -506,7 +506,7 @@ ggplot(mpglong) +
 ![](images/live.jpg)
 
 ## Edgar Anderson's Iris Data
-This famous (Fisher's or Anderson's) iris data set gives the measurements in centimeters of the variables sepal length and width and petal length and width, respectively, for 50 flowers from each of 3 species of iris. 
+This famous (Fisher's or Anderson's) iris dataset gives the measurements in cm of the lenght and width of sepals and petals for 50 flowers from each of 3 species of iris. 
 
 The species are Iris **setosa, versicolor, and virginica**.
 \vspace{1em}
@@ -567,7 +567,7 @@ List of Chemical properties of a group of three types of wines (Barolo, Barbera 
 
 ## Data Carpentry
 
-> With the term "data carpentry" we identify all the set of operations/manipulations we currently do during the process of data exploration
+> With the term "data carpentry" we identify the set of operations/manipulations we frequently do during the process of data exploration
 
 \vspace{1em}
 
@@ -580,7 +580,7 @@ List of Chemical properties of a group of three types of wines (Barolo, Barbera 
 
 ## The old way ...
 
-In the “standard” data analysis workflow, when several steps of transformation are needed the output of each transformation are saved and become the input of the subsequent step.
+In the “standard” data analysis workflow, when several steps of transformation are needed, the output of each transformation is saved and become the input of the subsequent step.
 This is time and memory inefficient ...
 \vspace{1em}
 \scriptsize
@@ -701,10 +701,10 @@ library(ggthemes)
 
 
 ## Plotting colors
-A good choice of colors is fundamental to highlight the scientifica message of every plot. 
+A good choice of colors is fundamental to highlight the scientific message of every plot. 
 
 * We are not good in distinguishing too many differnt colors
-* The level "visual" similarity of the colors will be implicitly perceived as sample similarity
+* The level of "visual" similarity of the colors will be implicitly perceived as sample similarity
 * Do we need a B&W representation?
 * Do we want to be "color blind" safe?
 
@@ -805,7 +805,7 @@ athl <- read_csv("data/athlete_events.csv")
 
 \footnotesize
 * `group_by()`: this function can be used inside a pipe to group the samples on the bases of a set of discrete variables. Grouping can be removed from a tibble by using the `ungroup()` function
-* `summarise()`: this function can be used apply some sort summary function (e.g. mean, median, sd, ...) on the grouped data frame. summarise can be used also to calculate multiple statistics
+* `summarise()`: this function can be used to apply some sort summary function (e.g. mean, median, sd, ...) on the grouped data frame. `summarise` can be used also to calculate multiple statistics
 
 \vspace{1em}
 \scriptsize
@@ -847,7 +847,7 @@ athl %>%
 ## Assignment #9
 
 * Get the "Olympic Game Dataset"
-* Make a plot showing the trend of the average BMI of the participants/medal winners for a set of running disciplines of increasing length (100m, 200m, 400m, 800m, 1500m, 5000m, 10000m, marathon)
+* Make a plot showing the trend of the average BMI (Weight / Height (m)) of the participants/medal winners for a set of running disciplines of increasing length (100m, 200m, 400m, 800m, 1500m, 5000m, 10000m, marathon)
 
 Note: some helpful code hits are included in practical_3
 

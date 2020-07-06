@@ -137,7 +137,7 @@ iris %>%
 
 
 
-
+Rank all athletes based on the # of gold metals
 ```{r}
 athl %>% 
   filter(Season == "Summer") %>% 
@@ -169,7 +169,7 @@ athl %>%
 ## Code Hints for Assignment #9
 
 ```{r}
-## If you calculate the mean of a vectro containing NAs, you will get NA by default
+## If you calculate the mean of a vector containing NAs, you will get NA by default
 ## to exclude the NAs you have to add an argument to the mean() function
 mean(c(1,4,5,6,NA), na.rm = TRUE)
 ```
@@ -190,7 +190,7 @@ id100 <- grep("400",eventlist)
 id100
 
 
-## prints the event names which contains "100"
+## prints the event names which contains "400"
 eventlist[id100]
 
 ```
