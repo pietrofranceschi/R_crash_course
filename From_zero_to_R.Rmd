@@ -488,10 +488,10 @@ Topically we prefer to work with wide data, but long formats can be extremely ha
 ***
 
 ```{r}
-mpglong <- gather(mpg, 
-                  key = "Property",
-                  value = "Value",
-                  displ,cty,hwy)
+mpglong <- pivot_longer(mpg, 
+                  names_to = "Property",
+                  values_to = "Value",
+                  c(displ,cty,hwy))
 
 ggplot(mpglong) + 
   geom_jitter(aes(x = class, y = Value, col = class), width = 0.1) + 
@@ -830,7 +830,8 @@ To summarize more than one columns grouping should be combined with `gather` ;-)
 
 ## Average Age in Athletics
 \tiny
-```{r, echo=TRUE, out.width="50%", fig.align = "center"}
+
+```{r, echo=TRUE, out.width="40%", fig.align = "center"}
 athl %>% 
   filter(Sport == "Athletics") %>% 
   filter(Sex == "M") %>% 
