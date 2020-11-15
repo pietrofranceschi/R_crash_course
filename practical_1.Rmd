@@ -203,7 +203,7 @@ This is some "material" for your assignment ;-)
 ```
 
 
-## Assignment #1
+## Assignment #3
 
 1. Play around with mpg changing the type of plots 
 2. Associate aesthetics to categorical or continuous properties

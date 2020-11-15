@@ -1,7 +1,7 @@
 ---
 title: "From Zero to R"
 author: "Pietro Franceschi"
-date: "11/02/2020"
+date: "15/11/2020"
 institute: "FEM - UBC"
 
 output: 
@@ -147,7 +147,7 @@ R can understand several basic **data types**
 * Logical: TRUE/FALSE
 * Character: a sequence of characters, everything between " "
 
-## Assignment
+## Assignment #1 (I do it!)
 
 \footnotesize
 ```{r eval=FALSE, echo=TRUE}
@@ -246,6 +246,8 @@ myfactor
 ```
 \normalsize
 
+\vspace{1em}
+
 > **Important** if not specified the levels of the factor are ordered in alphabetical order. The importance of this aspect will be clear when we will start dealing with plots
 
 
@@ -296,7 +298,8 @@ mylist$pippo  # also here the elemnt named pippo
 ```{r eval=FALSE, echo=TRUE}
 # 1. create a dataframe with two columns, 
 # one with the short name of each month, 
-# the second with the number of days, the third with the (approximate) season
+# the second with the number of days, 
+# the third with the (approximate) season
 # 2. extract the season and transform it into a factor
 # 3. do the same with a list
 
@@ -330,16 +333,26 @@ data(mpg)
 # Wrangling data tables
 
 ## My first Data visualization task
-![<https://r4ds.had.co.nz/>](images/cover.png){width=50%}
+
+
+```{r, echo=FALSE, fig.align='center', out.width="40%"}
+include_graphics("images/cover.png")
+```
+
 
 
 ## Mind Map of data wrangling
 
-![](images/flow.png)
+```{r, echo=FALSE, fig.align='center', out.width="80%"}
+include_graphics("images/flow.png")
+```
+
 
 ## Tabular and tidy data
 
-![](images/tidy.png)
+```{r, echo=FALSE, fig.align='center', out.width="70%"}
+include_graphics("images/tidy.png")
+```
 
 we can think of them as enormous and complicated excel tables
 
@@ -397,11 +410,12 @@ ggplot(data = mpg) +
 ```{r eval=FALSE, echo=TRUE}
 ## create an emty canvas ready for mpg
 ggplot(data = mpg) +
-  ## on the canvas plot points linking their eastetics to the column names
+  ## on the canvas plot points 
+  ## linking their aesthetics to the column names
   geom_point(mapping = aes(x = displ, y = hwy, col = class),  
              size = 3, 
              alpha = 0.5) +
-  ## add additional general aestetics
+  ## add additional general anesthetics
   theme_light() +  ## simple colors                
   theme(aspect.ratio = 0.5) ## plot aspect ratio
   
@@ -483,7 +497,12 @@ Faceting can be also used with a clever trick to display multiple variables in t
 The same *tidy* data.frame can be organized in a **wide** and a **long** format. 
 Topically we prefer to work with wide data, but long formats can be extremely handy ...
 
-![](images/widelong.png)
+
+
+```{r, echo=FALSE, fig.align='center', out.width="60%"}
+include_graphics("images/widelong.png")
+```
+
 
 ***
 
