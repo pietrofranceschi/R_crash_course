@@ -173,7 +173,7 @@ c <- a+b
 
 Multidimensional objects are constructed by collecting together multiple basic data types
 
-```{r, echo=FALSE, fig.align='center', out.width="70%"}
+```{r, echo=FALSE, fig.align='center', out.width="90%"}
 include_graphics("images/multidim.png")
 ```
 
@@ -261,7 +261,9 @@ myfactor
 
 \footnotesize
 ```{r eval=FALSE, echo=TRUE}
-# like coordinates ... 
+# like coordinates ...
+
+mydataframe[2,3] ## element in row 2, col 3
 mydataframe[1,]  ## first row 
 mydataframe[,1]  ## first column
 mydataframe[,"col1"] ## the column  "col1"
@@ -296,21 +298,20 @@ mylist$pippo  # also here the elemnt named pippo
 
 \small
 ```{r eval=FALSE, echo=TRUE}
-# 1. create a dataframe with two columns, 
+# 1. create a dataframe with three columns, 
 # one with the short name of each month, 
 # the second with the number of days, 
 # the third with the (approximate) season
 # 2. extract the season and transform it into a factor
-# 3. do the same with a list
+
 
 data.frame()
-factor()
 list()
 ```
 
 
 ## Packages
-The functionlities of R are expanded by "packages". Packages contain functions and, optionally data. To make a package available you have to
+The functionalities of R are expanded by "packages". Packages contain functions and, optionally data. To make a package available you have to
 
 * download and compile it on your machine
 * load it in the workspace

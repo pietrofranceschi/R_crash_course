@@ -11,9 +11,9 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-The objective here is to start familaiarizing with R, and Rstudio As you see the characetr '#' is udes to idetify lines of comments they are not interpreted and are useful for us to kee track of the process of analysis
+The objective here is to start familiarizing with R, and Rstudio As you see the character '#' is used to identify lines of comments they are not interpreted and are useful for us to keep track of the process of analysis
 
-As discussed assignment (sending somethingin the workspace) is done using '<-' the shrotcut to insert it is 'ALT' + '-' 
+As discussed assignment (sending somethings the workspace) is done using '<-' the shortcut to insert it is 'ALT' + '-' 
 a complete list of shortcut can be found in the menu under 'tools'
 
 ```{r}
@@ -150,7 +150,8 @@ And now we look at plots!
 ```{r}
 ## my first plot .... engine displacement, miles per gallon
 ggplot(data = mpg) +
-  geom_point(mapping = aes(x = displ, y = hwy), col = "red")
+  geom_point(mapping = aes(x = displ, y = cty, col = class, shape = class), size = 2) +
+  theme_bw()
   
 ```
 
@@ -161,14 +162,29 @@ This goes a little bit farer away
 ```{r}
 ggplot(data = mpg) +
   ## on the canvas plot points linking their eastetics to the column names!
-  geom_point(mapping = aes(x = displ, y = hwy, col = class),  
+  geom_point(mapping = aes(x = displ, y = hwy, col = cty),  
              size = 3, 
              alpha = 0.5) +
+  scale_color_gradientn(colours = terrain.colors(10)) + 
   ## add additional general aestetics
   theme_light() +
   theme(aspect.ratio = 0.5)
 
 ```
+
+
+```{r}
+ggplot(data = mpg) +
+  ## on the canvas plot points linking their eastetics to the column names!
+  geom_point(mapping = aes(x = cty, y = hwy, col = displ),  
+             size = 3, 
+             alpha = 0.5) +
+  scale_color_gradientn(colours = terrain.colors(10)) + 
+  ## add additional general aestetics
+  theme_light() +
+  theme(aspect.ratio = 0.5)
+```
+
 
 
 
@@ -186,8 +202,10 @@ ggplot(data = mpg) +
 
 ```{r}
 ## or jitter!
-ggplot(data = mpg) +
-  geom_jitter(mapping = aes(x = class, y = displ, col = class), width = 0.1)
+ggplot(mpg,aes(x = class, y = displ)) +
+  geom_violin(aes(col = class)) + 
+  geom_jitter(aes(col = manufacturer), width = 0.1)
+  
 
 ```
 
@@ -219,7 +237,7 @@ As we discussed, faceting is used to split a plot in different subpanels on the 
 ## group specific subplots
 ggplot(data = mpg) + 
   geom_point(mapping = aes(x = displ, y = hwy, col = class), alpha = 0.5) +
-  facet_wrap(~class) + 
+  facet_wrap(~class, scales = "free_y") + 
   theme_light() +
   theme(aspect.ratio = 0.5)
 ```
@@ -276,6 +294,44 @@ head(iris)
 
 
 
+```{r}
+ggplot(iris) + 
+  geom_point(aes(x = Sepal.Length, y = Petal.Length, col = Species)) + 
+  theme_light() + 
+  ylab("Petal Length") + 
+  xlab("Sepal Length") + 
+  ggtitle("My Plot") + 
+  scale_color_brewer(palette = "Set1") + 
+  theme(aspect.ratio = 1,
+        axis.text = element_text(color = "red"))
+```
 
+
+```{r}
+irislong <- pivot_longer(iris, c("Sepal.Length","Sepal.Width","Petal.Length","Petal.Width"),
+                         names_to = "Proprietà",
+                         values_to = "Valore")
+```
+
+
+
+
+```{r}
+ggplot(irislong, aes(x = Species, y = Valore, col = Species)) + 
+  geom_boxplot(aes(fill = Species), alpha = 0.5) + 
+  geom_jitter(width = 0.1, size = 0.4) + 
+  facet_wrap(~Proprietà, scales = "free_y") + 
+  xlab("") + 
+  theme_light() + 
+  theme(aspect.ratio = 0.8,
+        strip.text = element_text(colour = "black"))
+  
+```
+
+```{r}
+library(readr)
+wines <- read_csv("data/wines.csv")
+View(wines)
+```
 
 
