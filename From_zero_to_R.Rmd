@@ -75,12 +75,6 @@ include_graphics("images/rstudio.png")
 ```
 
 
-## RStudio
-```{r, echo=FALSE, fig.align='center', out.width="90%"}
-include_graphics("images/live.jpg")
-```
-
-
 ## How do we work
 
 ### Organize your work
@@ -92,8 +86,6 @@ include_graphics("images/live.jpg")
 * **.R** files with this extension can be executed by R. The comments are marked by #
 * **.Rmd** these files are typical of RStudio and consist of a mixture of text and code *chunks*
 
-***
-![](images/live.jpg)
 
 ## Key idea #1: Working directory
 
@@ -204,8 +196,6 @@ The possible arguments of a function can be checked in the extensive and complet
 
 
 
-
-
 ## Multidimensional Objects
 
 Multidimensional objects are constructed by collecting together multiple basic data types
@@ -218,9 +208,7 @@ include_graphics("images/multidim.png")
 The elements (or the rows and columns) can be also **named**
 
 
-
 ## Functions and multidimensional objects
-
 
 **Multidimensional objects** are created by specific **functions**, with really evocative names ;-)
 
@@ -261,6 +249,7 @@ myfactor
 * by **position**, giving the "coordinates"
 * by **name** (more robust)
 
+
 ## Arrays, matrices and data frames
 
 \footnotesize
@@ -296,21 +285,6 @@ mylist[["pippo"]] # the element named pippo
 
 mylist$pippo  # also here the elemnt named pippo
 
-```
-
-## Assignment #2
-
-\small
-```{r eval=FALSE, echo=TRUE}
-# 1. create a dataframe with three columns, 
-# one with the short name of each month, 
-# the second with the number of days, 
-# the third with the (approximate) season
-# 2. extract the season and transform it into a factor
-
-
-data.frame()
-list()
 ```
 
 
@@ -459,15 +433,6 @@ ggplot(data = mpg) +
  `ciao` # - the "name" ogf the column
 ```
 
-***
-![](images/live.jpg)
-
-## Assignment #3
-
-1. Play around with mpg changing the type of plots 
-2. Associate aesthetics to categorical or continuous properties
-3. Make a boxplot of "displ" as a function of the class of the vehicle
-4. Just play and ask!
 
 ## Splitting the plot in subplots
 ```{r}
@@ -526,25 +491,6 @@ ggplot(mpglong) +
   theme(aspect.ratio = 1)
 ```
 
-***
-![](images/live.jpg)
-
-## Edgar Anderson's Iris Data
-This famous (Fisher's or Anderson's) iris dataset gives the measurements in cm of the lenght and width of sepals and petals for 50 flowers from each of 3 species of iris. 
-
-The species are Iris **setosa, versicolor, and virginica**.
-\vspace{1em}
-\scriptsize
-```{r echo=TRUE}
-## you get it with 
-data(iris)
-## visualize data
-head(iris,5)
-```
-
-## Assignment #4
-1. Look for correlation between  Sepal.Length and Sepal.Width (Petal.Length and Petal.Width) for the three iris varieties
-2. Make a faceted boxplot showing the four iris properties as a function of the species  
 
 ## Read and Write data
 

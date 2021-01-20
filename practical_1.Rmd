@@ -1,14 +1,12 @@
-  ---
-title: "Practicals 1"
+---
+title: "Practical_1"
 author: "Pietro Franceschi"
-date: "29/09/2019"
-output:
-  word_document: default
-  html_document: default
+date: "03/10/2019"
+output: html_document
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = FALSE)
 ```
 
 The objective here is to start familiarizing with R, and Rstudio As you see the character '#' is used to identify lines of comments they are not interpreted and are useful for us to keep track of the process of analysis
@@ -16,7 +14,7 @@ The objective here is to start familiarizing with R, and Rstudio As you see the 
 As discussed assignment (sending somethings the workspace) is done using '<-' the shortcut to insert it is 'ALT' + '-' 
 a complete list of shortcut can be found in the menu under 'tools'
 
-```{r}
+```{r }
 ## BASIC ASSIGNMENTS  #########################
 a <- 1
 A <- 2
@@ -109,8 +107,7 @@ mymonths <- c("Jan","Feb","Mar",
 days <- c(31,28,31,30,31,30,31,31,30,31,30,31)
 season <- c(rep(c("winter","spring","summer","autumn"), each = 3))
 
-yeardf <- data.frame("month" = mymonths, "length" = days, "season" = season,
-                     stringsAsFactors = FALSE)
+yeardf <- data.frame("month" = mymonths, "length" = days, "season" = season)
 
 factor(yeardf$season)
 
@@ -150,8 +147,11 @@ And now we look at plots!
 ```{r}
 ## my first plot .... engine displacement, miles per gallon
 ggplot(data = mpg) +
-  geom_point(mapping = aes(x = displ, y = cty, col = class, shape = class), size = 2) +
-  theme_bw()
+  geom_jitter(mapping = aes(x = class, y = hwy, col = class), size = 1, width = 0.2) +
+  geom_boxplot(mapping = aes(x = class, y = hwy, fill = class), alpha = 0.5) + 
+  theme_light() + 
+  theme(aspect.ratio = 0.6) + 
+  ggtitle("Plot")
   
 ```
 
@@ -203,8 +203,9 @@ ggplot(data = mpg) +
 ```{r}
 ## or jitter!
 ggplot(mpg,aes(x = class, y = displ)) +
-  geom_violin(aes(col = class)) + 
-  geom_jitter(aes(col = manufacturer), width = 0.1)
+  geom_jitter(aes(col = manufacturer), width = 0.1) + 
+  geom_violin(aes(col = class)) 
+ 
   
 
 ```
@@ -237,7 +238,7 @@ As we discussed, faceting is used to split a plot in different subpanels on the 
 ## group specific subplots
 ggplot(data = mpg) + 
   geom_point(mapping = aes(x = displ, y = hwy, col = class), alpha = 0.5) +
-  facet_wrap(~class, scales = "free_y") + 
+  facet_wrap(~class, scales = "free") + 
   theme_light() +
   theme(aspect.ratio = 0.5)
 ```
@@ -274,7 +275,10 @@ ggplot(mpglong) +
   facet_wrap(~Property, scales = "free") + 
   coord_flip() +         ### switch the axis to show the names ...
   theme_light() + 
-  theme(aspect.ratio = 1)
+  theme(aspect.ratio = 1,
+        axis.text = element_text(size = 17),
+        axis.title = element_text(size = 20, color  = "orange")
+        )
 ```
 
 
