@@ -169,18 +169,6 @@ c <- a+b
 * is 1 different from "1"?
 
 
-## Multidimensional Objects
-
-Multidimensional objects are constructed by collecting together multiple basic data types
-
-```{r, echo=FALSE, fig.align='center', out.width="90%"}
-include_graphics("images/multidim.png")
-```
-
-
-The elements (or the rows and columns) can be also **named**
-
-
 ## Functions
 
 Functions can be seen as "digestors", which handle some input producing output. 
@@ -213,6 +201,22 @@ The possible arguments of a function can be checked in the extensive and complet
 ## shows the help for the seq function
 ?seq
 ```
+
+
+
+
+
+## Multidimensional Objects
+
+Multidimensional objects are constructed by collecting together multiple basic data types
+
+```{r, echo=FALSE, fig.align='center', out.width="90%"}
+include_graphics("images/multidim.png")
+```
+
+
+The elements (or the rows and columns) can be also **named**
+
 
 
 ## Functions and multidimensional objects
