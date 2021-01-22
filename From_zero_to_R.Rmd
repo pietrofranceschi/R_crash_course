@@ -528,7 +528,7 @@ List of Chemical properties of a group of three types of wines (Barolo, Barbera 
 ## Assignment #5
 1. Get the wines data from GitHub (wines.csv)
 2. Import the data into R
-3. make a text summary of your data (`summary()`)
+3. Make a text summary of your data (`summary()`)
 4. Plot the relation between proanthocyanidins and total phenols for the three types of wines.
 5. Can you do a boxplot of the different properties of the wines (also here remember wide and narrow data.frames)?
 
@@ -607,9 +607,6 @@ wines %>%
 * \textcolor{blue}{select()} Used to include, exclude columns. to exclude just put a (-) before the name.
 * \textcolor{blue}{filter()} Used to focus only a subset of the rows depending on a criterion
 * \textcolor{blue}{mutate()} Used to modify the content of a column or combine columns together
-
-***
-![](images/live.jpg)
 
 
 ## Assignment #6
