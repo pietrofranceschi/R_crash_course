@@ -618,6 +618,23 @@ wines %>%
 
 **Important** Everything should be done with pipes! So only one command!
 
+## Grouping and summarising
+
+\footnotesize
+* `group_by()`: this function can be used inside a pipe to group the samples on the bases of a set of discrete variables. Grouping can be removed from a tibble by using the `ungroup()` function
+* `summarise()`: this function can be used to apply some sort summary function (e.g. mean, median, sd, ...) on the grouped data frame. `summarise` can be used also to calculate multiple statistics
+
+\vspace{1em}
+\scriptsize
+```{r echo = TRUE, eval = FALSE}
+## single summarise
+summarise(mymean = mean(var), ## what function should be applid. 
+          n = length(var))    ## another summary function    
+```
+
+\footnotesize
+To summarize more than one columns grouping should be combined with `gather` ;-)
+
 
 # Manipulating the graph aesthetics
 
@@ -754,47 +771,6 @@ athl <- read_csv("data/athlete_events.csv")
 ```
 
 
-
-***
-![](images/live.jpg)
-
-## Assignment #7
-
-* Get the "Olympic Game Dataset" from Github
-* Consider the athlets which were getting a medal in the Athletics Men's 100 metres
-* Do we see a trend in Age, Height, Weight over the years?
-* Can you do the same for the BMI (body mass index)
-* Do you see the same trend for Downhill Alpine Skiing?
-* Do you see the same trend for a discipline of endurance like marathon?
-
-
-## Grouping and summarising
-
-\footnotesize
-* `group_by()`: this function can be used inside a pipe to group the samples on the bases of a set of discrete variables. Grouping can be removed from a tibble by using the `ungroup()` function
-* `summarise()`: this function can be used to apply some sort summary function (e.g. mean, median, sd, ...) on the grouped data frame. `summarise` can be used also to calculate multiple statistics
-
-\vspace{1em}
-\scriptsize
-```{r echo = TRUE, eval = FALSE}
-## single summarise
-summarise(mymean = mean(var), ## what function should be applid. 
-          n = length(var))    ## another summary function    
-```
-
-\footnotesize
-To summarize more than one columns grouping should be combined with `gather` ;-)
-
-
-***
-![](images/live.jpg)
-
-## Assignment #8
-
-* Get the "Olympic Game Dataset"
-* List the athlets who won more than 4 gold medals in at least one summer olympic games
-* Save the list with their info in a file and load it in Excel
-
 ## Average Age in Athletics
 \tiny
 
@@ -812,12 +788,13 @@ athl %>%
   theme_light()
 ```
 
-## Assignment #9
+
+
+## BIG assignment!
 
 * Get the "Olympic Game Dataset"
 * Make a plot showing the trend of the average BMI (Weight / Height (m)) of the participants/medal winners for a set of running disciplines of increasing length (100m, 200m, 400m, 800m, 1500m, 5000m, 10000m, marathon)
 
-Note: some helpful code hits are included in practical_3
 
 
 
@@ -867,7 +844,7 @@ a <- pippo(b)
 
 ## Assignment #10
 
-* Create a function which calcuate the average value of anumeric vector
+* Create a function which calculate the average value of a numeric vector
 * Create a function which scales a vector to the interval [0,1]. So the minimum of the vector should be shifted to zero and the maximum scaled to one.
 
 ## *if* statements
@@ -916,7 +893,7 @@ pippo(10, b = 9) ## a is 10, b is now  9, while c keeps "ciao"
 
 * Create a function which calculates either the mean or the standard deviation of a vector. The choice should be performed by setting a specific argument in the function call
 * Create a function which calculate the mean of a numeric vector excluding missing values.
-* Use your function to calculate the mean inside a `summarise()` call in your analysis pipeline for the Assignment #9
+* Use your function to calculate the mean inside a `summarise()` call in your analysis pipeline for the BIG Assignment
 
 
 
